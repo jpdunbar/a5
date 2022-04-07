@@ -1,3 +1,4 @@
+from sklearn.metrics import euclidean_distances
 from a5 import *
 
 import numpy as np
@@ -13,6 +14,8 @@ import csv
 # Simply run the main function at the bottom of the file to check your results compared to the intended answers.
 #
 ##################################################
+
+
 
 # Loads the data file, does some preprocessing, returns numpy arrays for points and labels
 def load_data(filename):
@@ -126,6 +129,13 @@ class debug:
 
 
 if __name__ == '__main__':
+
+    #########
+
+
+
+    #########
+
     d = debug()
     print("\nYour entropy values: ")
     d.debug_entropy()
@@ -141,3 +151,6 @@ if __name__ == '__main__':
     ##  and to change some of the debug values once you have a 
     ##  working classifier!
     d.debug_knn_classifier()
+
+
+

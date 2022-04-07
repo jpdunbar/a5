@@ -31,7 +31,31 @@ def unique(iterable):
 # Returns: a value representing the entropy
 
 def calc_entropy(classifications):
-    raise NotImplementedError
+    """
+    complete (still double check though)
+    """
+
+    totaln = len(classifications)
+    cset = set(classifications)
+    thecount = {}  # {number: [occurance,probability] } 
+
+
+    for i in cset:
+        thecount[i] = [0,0] # creates row
+
+        for j in classifications: #loops to add the frequency of occurances
+            if i == j:
+                thecount[i][0]+= 1
+
+        thecount[i][1] =  thecount[i][0]/totaln #calculates proabability of occurance for thecount[i]
+
+
+    p = thecount[1][1]
+    notp = 1 - p
+
+    entropy  = (p* math.log(1/p,2)) + (notp * math.log(1/notp,2))
+
+    return entropy
 
 
 ##################################################
@@ -59,7 +83,25 @@ def calc_entropy(classifications):
 # - It may be a good idea to look up dictionary methods
 
 def calc_information_gain(parent_classifications, classifications_by_val, val_freqs):
-    raise NotImplementedError
+    """
+    complete (still double check though)
+    
+    assumptions made: there are only 2 classes pa nd not p that are labeled 1 and 2
+    
+    """
+
+
+    n = len(parent_classifications)
+
+    p1 = val_freqs[1]/n
+    p2 = val_freqs[2]/n
+    parent_entropy = calc_entropy(parent_classifications)
+    entropy1 = calc_entropy(classifications_by_val[1])
+    entropy2 = calc_entropy(classifications_by_val[2]) 
+
+
+    inf_gain  = p1*(parent_entropy - entropy1) + p2* (parent_entropy - entropy2)
+    return inf_gain
 
 
 ##################################################
@@ -204,13 +246,26 @@ class KNN_Classifier:
     ##################################################
     # Objective: Return the euclidean distance distance between two points
     def euclidean_distance(self, point1, point2):
-        raise NotImplementedError
+        """
+        calcualates euclidean distance of 2 points. 
+        expectation is in form point1 = (x,y)
+        """
+        x1 = point1[0]
+        y1 = point1[1]
+
+        x2 = point2[0]
+        y2 = point2[1]
+
+        return ((x2-x1)**2) + ((y2-y1)**2)
+
 
     ##################################################
     # Problem 3b - Pick Label
     ##################################################
     # Objective: Choose the most frequent label out of the labels for the k nearest neighbors
     def pick_label(self, top_k_labels):
+
+
         raise NotImplementedError
 
     ##################################################
@@ -223,3 +278,10 @@ class KNN_Classifier:
     #  - you may find heappush/pop to be useful to keep track of the k closet neighbors here
     def classify(self, point, sample_points, sample_labels):
         raise NotImplementedError
+
+
+
+
+if __name__ == '__main__':
+
+    print("boo")
