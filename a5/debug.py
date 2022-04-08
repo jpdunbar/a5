@@ -1,4 +1,4 @@
-from sklearn.metrics import euclidean_distances
+#from sklearn.metrics import euclidean_distances
 from a5 import *
 
 import numpy as np

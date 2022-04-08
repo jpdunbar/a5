@@ -165,7 +165,18 @@ class Node:
     # a point is a dictionary of each attribute for the point mapped to the attribute's value
 
     def classify(self, point):
-        raise NotImplementedError
+        # If the node has a classification, return the classification
+        if (self.classification != None):
+            return self.classification
+        else:
+            # Check if the value maps to a child node
+            for selectedPoint in point:
+                if(self.children.get(point.get(selectedPoint)) != None):
+                    x = self.children.get(point.get(selectedPoint))
+                    return Node.classify(x, point)
+            # Otherwise get the child node to other
+            return self.children.get(OTHER).classification
+
 
 
     ##################################################
